@@ -1,0 +1,51 @@
+{{ range $rIndex, $value := .enum.Values }}
+    {{ if ne "_" $value.PrefixedName }}
+      // New{{camelcase $value.Name}} creates a new error of type {{$value.Name}} with the given message.
+      func New{{camelcase $value.Name}}(msg string) *Error {
+        return newError({{$value.PrefixedName}}, msg, nil)
+      }
+
+      // Newf{{camelcase $value.Name}} creates a new error of type {{$value.Name}} with a formatted message.
+      func Newf{{camelcase $value.Name}}(format string, args ...any) *Error {
+        return newError({{$value.PrefixedName}}, fmt.Sprintf(format, args...), nil)
+      }
+
+      // Wrap{{camelcase $value.Name}} wraps an existing error of type {{$value.Name}} with the given message.
+      func Wrap{{camelcase $value.Name}}(err error, msg string) *Error {
+        if err == nil {
+	        return nil
+	      }
+        return newError({{$value.PrefixedName}}, msg, err)
+      }
+
+      // Wrapf{{camelcase $value.Name}} wraps an existing error of type {{$value.Name}} with a formatted message.
+      func Wrapf{{camelcase $value.Name}}(err error, format string, args ...any) *Error {
+        if err == nil {
+	        return nil
+	      }
+        return newError({{$value.PrefixedName}}, fmt.Sprintf(format, args...), err)
+      }
+
+      // Ensure{{camelcase $value.Name}} ensures the error is an *Error, falling back to {{$value.Name}} with the given message.
+      func Ensure{{camelcase $value.Name}}(err error, msg string) *Error {
+        if err == nil {
+          return nil
+        }
+        if e, ok := As(err); ok {
+          return e
+        }
+        return newError({{$value.PrefixedName}}, msg, err)
+      }
+
+      // Ensuref{{camelcase $value.Name}} ensures the error is an *Error, falling back to {{$value.Name}} with a formatted message.
+      func Ensuref{{camelcase $value.Name}}(err error, format string, args ...any) *Error {
+        if err == nil {
+          return nil
+        }
+        if e, ok := As(err); ok {
+          return e
+        }
+        return newError({{$value.PrefixedName}}, fmt.Sprintf(format, args...), err)
+      }
+    {{- end }}
+{{- end}}
