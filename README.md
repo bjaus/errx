@@ -2,6 +2,8 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/bjaus/errx.svg)](https://pkg.go.dev/github.com/bjaus/errx)
 [![Go Report Card](https://goreportcard.com/badge/github.com/bjaus/errx)](https://goreportcard.com/report/github.com/bjaus/errx)
+[![CI](https://github.com/bjaus/errx/actions/workflows/ci.yml/badge.svg)](https://github.com/bjaus/errx/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/bjaus/errx/branch/main/graph/badge.svg)](https://codecov.io/gh/bjaus/errx)
 
 Structured error handling for Go with standardized error codes, three-tier messaging, and seamless `slog` integration.
 
